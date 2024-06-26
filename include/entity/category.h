@@ -7,7 +7,8 @@
 
 typedef struct
 {
-    char name[50];
+    int id;
+    const char* name;
 } Category;
 
 #endif //CATEGORY_H

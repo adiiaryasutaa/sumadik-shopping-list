@@ -1,8 +1,23 @@
-[
-  {
-    "name": "Rice"
-  },
-  {
-    "name": "Ow"
-  }
-]
+{
+	"data":	[{
+			"id":	1,
+			"name":	"Beras",
+			"quantity":	1,
+			"category_id":	13
+		}, {
+			"id":	2,
+			"name":	"Mie",
+			"quantity":	2,
+			"category_id":	13
+		}, {
+			"id":	3,
+			"name":	"Bihun",
+			"quantity":	10,
+			"category_id":	13
+		}, {
+			"id":	4,
+			"name":	"Roti",
+			"quantity":	200,
+			"category_id":	15
+		}]
+}

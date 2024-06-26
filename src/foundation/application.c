@@ -9,54 +9,51 @@
 #include "service/category_service.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void run_app()
 {
-    int selection = 0;
-
-    do
+    while (true)
     {
-        char name[50];
-        selection = menu();
+        const int selection = menu();
 
         switch (selection)
         {
         case 1:
-            add_item();
-            break;
-        case 2:
-            printf("Enter item name to search: ");
-            scanf("%s", name);
-            search_item(name);
-            break;
-        case 3:
-            printf("Enter item name to delete: ");
-            scanf("%s", name);
-            delete_item(name);
-            break;
-        case 4:
+            system("clear");
             add_category();
             break;
+        case 2:
+            system("clear");
+            search_category();
+            break;
+        case 3:
+            system("clear");
+            delete_category();
+            break;
+        case 4:
+            system("clear");
+            add_item();
+            break;
         case 5:
-            printf("Enter category name to search: ");
-            scanf("%s", name);
-            search_category(name);
+            system("clear");
+            search_item();
             break;
         case 6:
-            printf("Enter category name to delete: ");
-            scanf("%s", name);
-            delete_category(name);
+            system("clear");
+            delete_item();
             break;
         case 7:
-            printf("Total shopping cost: %.2f\n", calculate_total_price());
-            break;
-        case 0:
-            printf("Thank you!\n");
-            break;
+            system("clear");
+            calculate_total_price();
+            return;
+        case 8:
+            system("clear");
+            printf("Terima Kasih!\n");
+            return;
         default:
-            printf("Invalid choice.\n");
+            printf("Pilihan Tidak Valid.\n");
             break;
         }
     }
-    while (selection != 0);
 }

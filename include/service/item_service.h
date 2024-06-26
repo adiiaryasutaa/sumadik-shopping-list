@@ -7,10 +7,10 @@
 
 void add_item();
 
-void search_item(const char* name);
+void search_item();
 
-void delete_item(const char* name);
+void delete_item();
 
-float calculate_total_price();
+void calculate_total_price();
 
 #endif //ITEM_SERVICE_H

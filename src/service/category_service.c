@@ -3,6 +3,7 @@
 //
 
 #include "service/category_service.h"
+#include "database/database.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -12,42 +13,90 @@ int categoryCount = 0;
 
 void add_category()
 {
-    printf("Enter category name: ");
-    scanf("%s", categories[categoryCount].name);
-    categoryCount++;
+    printf("TAMBAH KATEGORI\n");
+    printf("Tekan underscore untuk menghentikan penambahan.\n\n");
+
+    while (true)
+    {
+        char name[100];
+        printf("Nama Kategori: ");
+        scanf("%s", name);
+
+        if (!strcmp(name, "_"))
+        {
+            break;
+        }
+
+        Category category;
+
+        category.id = get_category_last_id();
+        category.name = name;
+
+        insert_category(category);
+
+        printf("Kategori Ditambahkan!\n\n");
+    }
 }
 
-void search_category(const char* name)
+void search_category()
 {
-    int found = 0;
-    for (int i = 0; i < categoryCount; i++)
+    printf("CARI KATEGORI\n");
+    printf("Tekan underscore untuk menghentikan pencarian.\n\n");
+
+    while (true)
     {
-        if (strcmp(categories[i].name, name) == 0)
+        char name[100];
+        printf("Masukan nama kategori: ");
+        scanf("%s", name);
+
+        if (!strcmp(name, "_"))
         {
-            printf("Category: %s\n", categories[i].name);
-            found = 1;
+            break;
         }
-    }
-    if (!found)
-    {
-        printf("Category not found.\n");
+
+        const Category* category = find_category(name);
+
+        if (category == NULL)
+        {
+            printf("Kategori tidak ditemukan!\n\n");
+        }
+        else
+        {
+            printf("Kategori ditemukan!\n\n");
+        }
     }
 }
 
-void delete_category(const char* name)
+void delete_category()
 {
-    for (int i = 0; i < categoryCount; i++)
+    printf("HAPUS KATEGORI\n");
+    printf("Tekan 0 untuk menghentikan penghapusan.\n\n");
+
+    while (true)
     {
-        if (strcmp(categories[i].name, name) == 0)
+        const int size = get_category_size();
+        const Category categories[size];
+        get_all_categories(categories);
+
+        for (int i = 0; i < size; i++)
         {
-            for (int j = i; j < categoryCount - 1; j++)
-            {
-                categories[j] = categories[j + 1];
-            }
-            categoryCount--;
-            printf("Category deleted successfully.\n");
-            return;
+            printf("%d. %s\n", i + 1, categories[i].name);
         }
+
+        printf("Pilih Kategori yang akan dihapus [1-%d]: ", size);
+
+        int selection;
+        scanf("%d", &selection);
+
+        if (selection <= 0)
+        {
+            break;
+        }
+
+        const Category* selected_category = &categories[selection - 1];
+
+        destroy_category(selected_category);
+
+        printf("Kategori Dihapus!\n\n");
     }
-    printf("Category not found.\n");
 }

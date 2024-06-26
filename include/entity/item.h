@@ -7,10 +7,10 @@
 
 typedef struct
 {
-    char name[50];
+    int id;
+    const char *name;
     int quantity;
-    float price;
-    char category[50];
+    int category_id;
 } Item;
 
 #endif //ITEM_H
