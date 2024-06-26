@@ -7,17 +7,20 @@
 #include <stdio.h>
 #include <string.h>
 
-void addCategory(Category* categories, int* categoryCount)
+Category categories[100];
+int categoryCount = 0;
+
+void add_category()
 {
     printf("Enter category name: ");
-    scanf("%s", categories[*categoryCount].name);
-    (*categoryCount)++;
+    scanf("%s", categories[categoryCount].name);
+    categoryCount++;
 }
 
-void searchCategory(Category* categories, int categoryCount, char* name)
+void search_category(const char* name)
 {
-    int i, found = 0;
-    for (i = 0; i < categoryCount; i++)
+    int found = 0;
+    for (int i = 0; i < categoryCount; i++)
     {
         if (strcmp(categories[i].name, name) == 0)
         {
@@ -31,18 +34,17 @@ void searchCategory(Category* categories, int categoryCount, char* name)
     }
 }
 
-void deleteCategory(Category* categories, int* categoryCount, char* name)
+void delete_category(const char* name)
 {
-    int i, j;
-    for (i = 0; i < *categoryCount; i++)
+    for (int i = 0; i < categoryCount; i++)
     {
         if (strcmp(categories[i].name, name) == 0)
         {
-            for (j = i; j < *categoryCount - 1; j++)
+            for (int j = i; j < categoryCount - 1; j++)
             {
                 categories[j] = categories[j + 1];
             }
-            (*categoryCount)--;
+            categoryCount--;
             printf("Category deleted successfully.\n");
             return;
         }

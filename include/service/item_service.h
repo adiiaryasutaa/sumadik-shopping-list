@@ -5,14 +5,12 @@
 #ifndef ITEM_SERVICE_H
 #define ITEM_SERVICE_H
 
-#include "entity/item.h"
+void add_item();
 
-void addItem(Item* shoppingList, int* itemCount);
+void search_item(const char* name);
 
-void searchItem(Item* shoppingList, int itemCount, char* name);
+void delete_item(const char* name);
 
-void deleteItem(Item* shoppingList, int* itemCount, char* name);
-
-float calculateTotalCost(Item* shoppingList, int itemCount);
+float calculate_total_price();
 
 #endif //ITEM_SERVICE_H

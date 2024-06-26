@@ -3,28 +3,33 @@
 //
 
 #include "service/item_service.h"
+#include "entity/item.h"
 
 #include <stdio.h>
 #include <string.h>
 
-void addItem(Item* shoppingList, int* itemCount)
+Item shoppingList[100];
+int itemCount = 0;
+
+void add_item()
 {
     printf("Enter item name: ");
-    scanf("%s", shoppingList[*itemCount].name);
+    scanf("%s", shoppingList[itemCount].name);
     printf("Enter item quantity: ");
-    scanf("%d", &shoppingList[*itemCount].quantity);
+    scanf("%d", &shoppingList[itemCount].quantity);
     printf("Enter item price: ");
-    scanf("%f", &shoppingList[*itemCount].price);
+    scanf("%f", &shoppingList[itemCount].price);
     printf("Enter item category: ");
-    scanf("%s", shoppingList[*itemCount].category);
+    scanf("%s", shoppingList[itemCount].category);
 
-    (*itemCount)++;
+    itemCount++;
 }
 
-void searchItem(Item* shoppingList, int itemCount, char* name)
+void search_item(const char* name)
 {
-    int i, found = 0;
-    for (i = 0; i < itemCount; i++)
+    int found = 0;
+
+    for (int i = 0; i < itemCount; i++)
     {
         if (strcmp(shoppingList[i].name, name) == 0)
         {
@@ -41,18 +46,17 @@ void searchItem(Item* shoppingList, int itemCount, char* name)
     }
 }
 
-void deleteItem(Item* shoppingList, int* itemCount, char* name)
+void delete_item(const char* name)
 {
-    int i, j;
-    for (i = 0; i < *itemCount; i++)
+    for (int i = 0; i < itemCount; i++)
     {
         if (strcmp(shoppingList[i].name, name) == 0)
         {
-            for (j = i; j < *itemCount - 1; j++)
+            for (int j = i; j < itemCount - 1; j++)
             {
                 shoppingList[j] = shoppingList[j + 1];
             }
-            (*itemCount)--;
+            itemCount--;
             printf("Item deleted successfully.\n");
             return;
         }
@@ -60,13 +64,14 @@ void deleteItem(Item* shoppingList, int* itemCount, char* name)
     printf("Item not found.\n");
 }
 
-float calculateTotalCost(Item* shoppingList, int itemCount)
+float calculate_total_price()
 {
     float total = 0;
-    int i;
-    for (i = 0; i < itemCount; i++)
+
+    for (int i = 0; i < itemCount; i++)
     {
         total += shoppingList[i].price * shoppingList[i].quantity;
     }
+
     return total;
 }

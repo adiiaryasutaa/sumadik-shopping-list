@@ -7,10 +7,10 @@
 
 #include "entity/category.h"
 
-void addCategory(Category* categories, int* categoryCount);
+void add_category();
 
-void searchCategory(Category* categories, int categoryCount, char* name);
+void search_category(const char* name);
 
-void deleteCategory(Category* categories, int* categoryCount, char* name);
+void delete_category(const char* name);
 
 #endif //CATEGORY_SERVICE_H
